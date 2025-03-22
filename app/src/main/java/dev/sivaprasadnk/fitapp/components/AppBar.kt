@@ -8,6 +8,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import dev.sivaprasadnk.fitapp.R
@@ -23,6 +25,7 @@ fun AppBar(){
                 Text(
                     stringResource(R.string.app_title),
                     textAlign = TextAlign.Center,
+                    fontFamily = FontFamily(Font(R.font.playfair_display)),
                     modifier = Modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Bold,
                 )

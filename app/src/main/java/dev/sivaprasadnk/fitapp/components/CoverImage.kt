@@ -12,6 +12,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,11 +31,12 @@ fun CoverImage() {
         Text(
             "Welcome to ${stringResource(R.string.app_title)}",
             color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
+            fontWeight = FontWeight.W600,
+            fontFamily = FontFamily(Font(R.font.playfair_display)),
+            fontSize = 24.sp,
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(start = 16.dp, bottom = 8.dp)
+                .padding(start = 16.dp, bottom = 16.dp)
         )
     }
 }
