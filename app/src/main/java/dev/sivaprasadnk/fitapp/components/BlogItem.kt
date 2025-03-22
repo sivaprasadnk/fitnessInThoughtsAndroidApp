@@ -27,15 +27,16 @@ import dev.sivaprasadnk.fitapp.data.Blog
 fun BlogItem(blog: Blog){
     Column(
     ) {
-        Image(
-            painter = rememberAsyncImagePainter(blog.imageNetworkPath),
-            contentDescription = "featured",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .clip(RoundedCornerShape(8.dp))
-        )
+//        Image(
+//            painter = rememberAsyncImagePainter(blog.imageNetworkPath),
+//            contentDescription = "featured",
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(250.dp)
+//                .clip(RoundedCornerShape(8.dp))
+//        )
+        NetworkImage(blog.imageNetworkPath)
         HeightBox(16)
         Text(blog.dateString, fontSize = 12.sp, color = Color.Gray)
         HeightBox(10)
