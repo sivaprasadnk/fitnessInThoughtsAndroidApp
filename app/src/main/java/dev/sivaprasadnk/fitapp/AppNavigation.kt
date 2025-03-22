@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.sivaprasadnk.fitapp.screens.HomeScreen
+import dev.sivaprasadnk.fitapp.screens.SplashScreen
 
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier){

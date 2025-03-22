@@ -40,7 +40,10 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.twain)
+    implementation(libs.coil.compose)
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

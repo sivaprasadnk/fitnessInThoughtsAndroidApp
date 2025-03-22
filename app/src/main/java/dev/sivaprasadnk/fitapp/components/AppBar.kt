@@ -25,7 +25,7 @@ fun AppBar(){
                 Text(
                     stringResource(R.string.app_title),
                     textAlign = TextAlign.Center,
-                    fontFamily = FontFamily(Font(R.font.playfair_display)),
+                    fontFamily = FontFamily(Font(R.font.lora_bold)),
                     modifier = Modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Bold,
                 )

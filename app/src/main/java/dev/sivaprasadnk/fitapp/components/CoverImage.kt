@@ -32,7 +32,7 @@ fun CoverImage() {
             "Welcome to ${stringResource(R.string.app_title)}",
             color = Color.White,
             fontWeight = FontWeight.W600,
-            fontFamily = FontFamily(Font(R.font.playfair_display)),
+            fontFamily = FontFamily(Font(R.font.lora_bold)),
             fontSize = 24.sp,
             modifier = Modifier
                 .align(Alignment.BottomStart)
