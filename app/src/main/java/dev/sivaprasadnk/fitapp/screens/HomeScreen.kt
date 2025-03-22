@@ -6,8 +6,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+
 import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.components.AppBar
 import dev.sivaprasadnk.fitapp.components.CoverImage
@@ -17,7 +19,9 @@ import dev.sivaprasadnk.fitapp.components.RecentPosts
 
 @Composable
 fun HomeScreen(
+
 ) {
+
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
         topBar = {

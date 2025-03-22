@@ -2,18 +2,18 @@ package dev.sivaprasadnk.fitapp.data
 
 data class Blog(
     val id: Int,
-    val title: String,
-    val dateString: String,
-    val subTitle: String,
+    val title: String?,
+    val dateString: String?,
+    val sub_title: String?,
     val content: String,
     val imageAssetPath: String,
-    val imageNetworkPath: String,
+    val image_network_path: String?,
     val isActive: Boolean,
     val isFeatured: Boolean,
     val cacheKey: String
 )
 
-val blogs = listOf<Blog>(
+val bloggs = listOf<Blog>(
     Blog(1, "### **Nourish to Flourish: The Essential Guide to a Balanced Diet** \uD83D\uDE0A\uD83E\uDD57\uD83C\uDF4E", "Jan 1, 2025", "A balanced diet is the foundation of a healthy lifestyle. It not only fuels your workouts but also ensures your body gets the essential nutrients it needs to function optimally. Whether your goal is weight management, muscle gain, or simply staying healthy, a thoughtful approach to your diet can make all the difference. Prioritizing whole, nutrient-dense foods helps improve energy levels and overall well-being. \uD83C\uDF4E\uD83E\uDD66\uD83D\uDCAA", "### Why Diet Matters\n" +
             "\n" +
             "Your diet plays a crucial role in: \uD83C\uDF4E\uD83D\uDCA8\uD83C\uDF3F\n" +

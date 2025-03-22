@@ -24,7 +24,7 @@ import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.data.Blog
 
 @Composable
-fun BlogItem(blog: Blog){
+fun BlogItem(blog: Blog) {
     Column(
     ) {
 //        Image(
@@ -36,25 +36,31 @@ fun BlogItem(blog: Blog){
 //                .height(250.dp)
 //                .clip(RoundedCornerShape(8.dp))
 //        )
-        NetworkImage(blog.imageNetworkPath)
+        if (blog.image_network_path != null)
+            NetworkImage(blog.image_network_path)
         HeightBox(16)
-        Text(blog.dateString, fontSize = 12.sp, color = Color.Gray)
+        if (blog.dateString != null)
+
+            Text(blog.dateString, fontSize = 12.sp, color = Color.Gray)
         HeightBox(10)
-        MarkdownText(
-            markdown = blog.title,
-            style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.lora_regular))
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
+        if (blog.title != null)
+            MarkdownText(
+                markdown = blog.title,
+                style = TextStyle(
+                    fontFamily = FontFamily(Font(R.font.lora_regular))
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
         HeightBox(10)
-        MarkdownText(
-            markdown = blog.subTitle,
-            style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.lora_regular))
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
+        if (blog.sub_title != null)
+
+            MarkdownText(
+                markdown = blog.sub_title,
+                style = TextStyle(
+                    fontFamily = FontFamily(Font(R.font.lora_regular))
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
         HeightBox(10)
         ReadMoreButton()
         HeightBox(16)

@@ -10,14 +10,19 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.sivaprasadnk.fitapp.data.blogs
+import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.sivaprasadnk.fitapp.BlogViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun RecentPosts() {
+fun RecentPosts(blogViewModel: BlogViewModel = viewModel()) {
+    val blogs by blogViewModel.blogs
+
     Column( // ✅ Use Column with a constrained height
         modifier = Modifier
             .fillMaxWidth()
@@ -26,14 +31,16 @@ fun RecentPosts() {
             .background(Color.White)
     ) {
         SectionTitle("R E C E N T")
-
-        Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
-        ) {
-            blogs.forEach { blog ->
-                BlogItem(blog) // ✅ Replaces LazyColumn with Column
+        if (blogs.isNotEmpty())
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                blogs.take(3).forEach { blog ->
+                    BlogItem(blog) // ✅ Replaces LazyColumn with Column
+                }
             }
-        }
 
         HeightBox(20)
     }
