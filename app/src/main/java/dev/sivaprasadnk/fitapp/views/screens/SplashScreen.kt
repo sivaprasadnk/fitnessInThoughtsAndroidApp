@@ -2,27 +2,17 @@ package dev.sivaprasadnk.fitapp.views.screens
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Network
 import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,54 +30,61 @@ import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.data.BlogViewModel
 import dev.sivaprasadnk.fitapp.views.components.HeightBox
 import dev.sivaprasadnk.fitapp.views.components.VersionText
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(
     navController: NavHostController = rememberNavController(),
-    blogViewModel: BlogViewModel,
+    blogViewModel: BlogViewModel
 ) {
     val context = LocalContext.current
     var isConnected by remember { mutableStateOf(checkInternetConnection(context)) }
+    val coroutineScope = rememberCoroutineScope()
 
-    // Automatically update connection status
-    LaunchedEffect(Unit) {
+    LaunchedEffect(isConnected) {
+        if (isConnected) {
+            coroutineScope.launch {
+                delay(1000) // Small delay for smoother transition
+                blogViewModel.fetchRecentBlogs()
+                navController.navigate("home_screen") {
+                    popUpTo("splash_screen") { inclusive = true }
+                }
+            }
+        }
+    }
+
+    DisposableEffect(context) {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: android.net.Network) {
-                isConnected = true
-//                navigateToHome(blogViewModel, navController)
+        val networkRequest = NetworkRequest.Builder()
+            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .build()
 
+        val networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                isConnected = true
             }
 
-            override fun onLost(network: android.net.Network) {
+            override fun onLost(network: Network) {
                 isConnected = false
             }
         }
 
-        connectivityManager.registerDefaultNetworkCallback(networkCallback)
+        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
 
-        // Cleanup when composable is removed
-//        onDispose {
-//            connectivityManager.unregisterNetworkCallback(networkCallback)
-//        }
-    }
-
-    // Automatically navigate when connected
-    LaunchedEffect(isConnected) {
-        if (isConnected) {
-            navigateToHome(blogViewModel, navController)
+        onDispose {
+            connectivityManager.unregisterNetworkCallback(networkCallback)
         }
     }
 
-    Scaffold(
-        containerColor = colorResource(R.color.bgColor)
-    ) { paddingValues ->
+    // UI
+    Scaffold(containerColor = colorResource(R.color.bgColor)) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val configuration = LocalConfiguration.current
             HeightBox((configuration.screenHeightDp * 0.37).toInt())
@@ -115,18 +112,7 @@ fun SplashScreen(
             }
         }
     }
-
-
-
 }
-
-fun navigateToHome(blogViewModel: BlogViewModel, navController: NavHostController){
-    blogViewModel.fetchRecentBlogs()
-        navController.navigate("home_screen") {
-            popUpTo("splash_screen") { inclusive = true }
-        }
-}
-
 
 // Function to check initial network state
 fun checkInternetConnection(context: Context): Boolean {
