@@ -53,49 +53,50 @@ fun DetailsScreen(id: Int, blogViewModel: BlogViewModel, navController: NavContr
                 .padding(all = 16.dp)
 
         ) {
-            if (loading)
-                CircularProgressIndicator()
-            else
-                Column(
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .background(color = Color.White)
-                        .verticalScroll(rememberScrollState())
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp)
-                    ,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    HeightBox(20)
-                    blog?.date_string?.let { Text(it) }
-                    HeightBox(16)
-                    blog?.title?.let {
-                        MarkdownText(
-                            markdown = it,
-                            style = TextStyle(
-                                fontFamily = FontFamily(Font(R.font.lora_regular))
-                            ),
-                            modifier = Modifier.fillMaxWidth()
-                        )
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .background(color = Color.White)
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                HeightBox(20)
+                if (blog === null)
+                    Column {
+                        HeightBox(50)
+                        CircularProgressIndicator()
                     }
-                    HeightBox(16)
-                    blog?.image_network_path?.let {
-                        NetworkImage(it)
-                    }
-                    HeightBox(16)
-                    blog?.sub_title?.let {
-                        MarkdownText(
-                            markdown = it,
-                        )
-                    }
-                    blog?.content?.let {
-                        MarkdownText(
-                            markdown = it,
-                        )
-                    }
-                    HeightBox(20)
-
+                blog?.date_string?.let { Text(it) }
+                HeightBox(16)
+                blog?.title?.let {
+                    MarkdownText(
+                        markdown = it,
+                        style = TextStyle(
+                            fontFamily = FontFamily(Font(R.font.lora_regular))
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
+                HeightBox(16)
+                blog?.image_network_path?.let {
+                    NetworkImage(it)
+                }
+                HeightBox(16)
+                blog?.sub_title?.let {
+                    MarkdownText(
+                        markdown = it,
+                    )
+                }
+                blog?.content?.let {
+                    MarkdownText(
+                        markdown = it,
+                    )
+                }
+                HeightBox(20)
+
+            }
         }
     }
 }

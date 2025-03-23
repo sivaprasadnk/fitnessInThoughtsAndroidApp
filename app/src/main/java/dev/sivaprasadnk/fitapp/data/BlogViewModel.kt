@@ -64,6 +64,7 @@ class BlogViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             try{
                 _detailsLoading.value= true
+                _blog.value= null
                 val response = blogService.getBlog(id)
                 if(response.isSuccessful){
                     _blog.value= response.body()!!
@@ -84,6 +85,7 @@ class BlogViewModel @Inject constructor() : ViewModel() {
     fun fetchAllBlogs(){
         viewModelScope.launch {
             try{
+                _allBlogs.value= emptyList()
                 val response = blogService.getAllBlogs()
                 if(response.isSuccessful){
                     _allBlogs.value= response.body()!!

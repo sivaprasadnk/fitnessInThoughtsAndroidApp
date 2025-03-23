@@ -1,13 +1,16 @@
 package dev.sivaprasadnk.fitapp.views.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -57,6 +60,14 @@ fun AllPostsScreen(blogViewModel: BlogViewModel, navController: NavHostControlle
             ) {
                 SectionTitle("A L L")
                 HeightBox(20)
+                if(blogs.isEmpty())
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Absolute.Center
+
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
