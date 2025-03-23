@@ -3,13 +3,13 @@ package dev.sivaprasadnk.fitapp.data
 data class Blog(
     val id: Int,
     val title: String?,
-    val dateString: String?,
+    val date_string: String?,
     val sub_title: String?,
     val content: String,
     val imageAssetPath: String,
     val image_network_path: String?,
-    val isActive: Boolean,
-    val isFeatured: Boolean,
+    val is_active: Boolean,
+    val is_featured: Boolean,
     val cacheKey: String
 )
 

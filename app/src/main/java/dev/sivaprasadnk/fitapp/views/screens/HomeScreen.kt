@@ -1,4 +1,4 @@
-package dev.sivaprasadnk.fitapp.screens
+package dev.sivaprasadnk.fitapp.views.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -9,19 +9,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.sivaprasadnk.fitapp.data.BlogViewModel
 
 import dev.sivaprasadnk.fitapp.R
-import dev.sivaprasadnk.fitapp.components.AppBar
-import dev.sivaprasadnk.fitapp.components.CoverImage
-import dev.sivaprasadnk.fitapp.components.FeaturedPost
-import dev.sivaprasadnk.fitapp.components.HeightBox
-import dev.sivaprasadnk.fitapp.components.RecentPosts
+import dev.sivaprasadnk.fitapp.views.components.AppBar
+import dev.sivaprasadnk.fitapp.views.components.CoverImage
+import dev.sivaprasadnk.fitapp.views.components.FeaturedPost
+import dev.sivaprasadnk.fitapp.views.components.HeightBox
+import dev.sivaprasadnk.fitapp.views.components.RecentPosts
 
 @Composable
-fun HomeScreen(
+fun HomeScreen(blogViewModel: BlogViewModel = viewModel()) {
 
-) {
-
+    val blogs by blogViewModel.blogs
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
         topBar = {
@@ -34,9 +35,12 @@ fun HomeScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             CoverImage()
-            FeaturedPost()
+            if (blogs.isNotEmpty())
+                blogs.find { it.is_featured }?.let { FeaturedPost(it) }
             HeightBox(50)
-            RecentPosts()
+            if (blogs.isNotEmpty())
+
+                RecentPosts(blogs.take(3))
             HeightBox(20)
 
         }

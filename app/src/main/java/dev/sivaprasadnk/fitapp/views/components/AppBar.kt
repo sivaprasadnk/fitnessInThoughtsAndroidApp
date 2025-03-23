@@ -1,4 +1,4 @@
-package dev.sivaprasadnk.fitapp.components
+package dev.sivaprasadnk.fitapp.views.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

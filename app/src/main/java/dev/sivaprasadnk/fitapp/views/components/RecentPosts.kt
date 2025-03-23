@@ -1,27 +1,19 @@
-package dev.sivaprasadnk.fitapp.components
+package dev.sivaprasadnk.fitapp.views.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.sivaprasadnk.fitapp.BlogViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.sivaprasadnk.fitapp.data.Blog
 
 @Composable
-fun RecentPosts(blogViewModel: BlogViewModel = viewModel()) {
-    val blogs by blogViewModel.blogs
+fun RecentPosts(blogs: List<Blog>) {
 
     Column( // ✅ Use Column with a constrained height
         modifier = Modifier
