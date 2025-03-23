@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -43,8 +44,10 @@ import dev.sivaprasadnk.fitapp.views.components.HeightBox
 import dev.sivaprasadnk.fitapp.views.components.VersionText
 
 @Composable
-fun SplashScreen(navController: NavHostController = rememberNavController()) {
-    val blogViewModel: BlogViewModel = viewModel()
+fun SplashScreen(
+    navController: NavHostController = rememberNavController(),
+    blogViewModel: BlogViewModel,
+) {
     val blogs by blogViewModel.blogs
     val isLoading by blogViewModel.loading
     var isCompleted = blogViewModel.completed.value
@@ -53,7 +56,6 @@ fun SplashScreen(navController: NavHostController = rememberNavController()) {
 
     LaunchedEffect(isConnected, blogs, isLoading) {
         if (isConnected) {
-            blogViewModel.fetchRecentBlogs()
             if (isCompleted) {
                 navController.navigate("home_screen") {
                     popUpTo("splash_screen") { inclusive = true }
@@ -68,7 +70,8 @@ fun SplashScreen(navController: NavHostController = rememberNavController()) {
     ) { paddingValues ->
         Column(
             modifier = Modifier
-                .padding(paddingValues).fillMaxSize(),
+                .padding(paddingValues)
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             val configuration = LocalConfiguration.current

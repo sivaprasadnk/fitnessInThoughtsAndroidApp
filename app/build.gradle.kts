@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android) // Add this line for Hilt
+    id("kotlin-kapt")
 }
 
 android {
@@ -40,6 +42,9 @@ android {
 }
 
 dependencies {
+    implementation (libs.androidx.hilt.navigation.compose)
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
     implementation(libs.twain)
     implementation(libs.coil.compose)
     implementation(libs.retrofit2.retrofit)

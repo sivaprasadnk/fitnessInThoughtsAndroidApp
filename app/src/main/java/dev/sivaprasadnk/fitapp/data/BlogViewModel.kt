@@ -1,13 +1,18 @@
 package dev.sivaprasadnk.fitapp.data
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.sivaprasadnk.fitapp.api.blogService
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BlogViewModel : ViewModel() {
+
+@HiltViewModel
+class BlogViewModel @Inject constructor() : ViewModel() {
     private val _blogs = mutableStateOf<List<Blog>>(emptyList())
     val blogs: State<List<Blog>> = _blogs
 
@@ -27,6 +32,7 @@ class BlogViewModel : ViewModel() {
 
 
     fun fetchRecentBlogs(){
+        Log.d("fetchRecentBlogs called", "")
         viewModelScope.launch {
             try{
                 val response = blogService.getRecentBlogs(3)

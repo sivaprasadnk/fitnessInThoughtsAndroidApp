@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.sivaprasadnk.fitapp.data.BlogViewModel
 
@@ -20,8 +21,7 @@ import dev.sivaprasadnk.fitapp.views.components.HeightBox
 import dev.sivaprasadnk.fitapp.views.components.RecentPosts
 
 @Composable
-fun HomeScreen(blogViewModel: BlogViewModel = viewModel()) {
-
+fun HomeScreen(blogViewModel: BlogViewModel) {
     val blogs by blogViewModel.blogs
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
