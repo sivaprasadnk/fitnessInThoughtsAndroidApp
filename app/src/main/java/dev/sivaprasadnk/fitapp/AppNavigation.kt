@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.sivaprasadnk.fitapp.data.BlogViewModel
+import dev.sivaprasadnk.fitapp.views.screens.AllPostsScreen
 import dev.sivaprasadnk.fitapp.views.screens.DetailsScreen
 import dev.sivaprasadnk.fitapp.views.screens.HomeScreen
 import dev.sivaprasadnk.fitapp.views.screens.SplashScreen
@@ -28,6 +29,9 @@ fun AppNavigation(
         composable("details_screen/{id}") { backStackEntry ->
             val blogId = backStackEntry.arguments?.getString("id")?.toInt() ?: -1
             DetailsScreen(blogId, blogViewModel, navController )
+        }
+        composable("all_posts_screen") {
+            AllPostsScreen(blogViewModel, navController )
         }
     }
 

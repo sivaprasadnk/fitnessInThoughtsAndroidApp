@@ -22,4 +22,7 @@ interface ApiService {
 
     @GET("blog/{id}")
     suspend fun getBlog(@Path("id") id: Int): Response<Blog>
+
+    @GET("blogs")
+    suspend fun getAllBlogs(): Response<List<Blog>>
 }

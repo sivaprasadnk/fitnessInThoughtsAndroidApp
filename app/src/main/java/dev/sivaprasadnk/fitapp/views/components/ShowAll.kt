@@ -1,5 +1,6 @@
 package dev.sivaprasadnk.fitapp.views.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,12 +17,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.R
 
 @Composable
-fun ShowAll(){
+fun ShowAll(navHostController: NavHostController){
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().clickable {
+            navHostController.navigate("all_posts_screen")
+        },
         horizontalArrangement = Arrangement.Absolute.Center
     ) {
         Text(

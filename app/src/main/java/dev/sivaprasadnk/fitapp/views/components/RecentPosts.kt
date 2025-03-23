@@ -32,7 +32,7 @@ fun RecentPosts(blogs: List<Blog>, navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(start = 8.dp, end = 8.dp)
             ) {
-                blogs.take(3).forEach { blog ->
+                blogs.forEach { blog ->
                     BlogItem(blog, navController) // ✅ Replaces LazyColumn with Column
                 }
             }
@@ -41,7 +41,7 @@ fun RecentPosts(blogs: List<Blog>, navController: NavHostController) {
             modifier = Modifier.padding(horizontal = 8.dp)
         )
         HeightBox(10)
-        ShowAll()
+        ShowAll(navController)
         HeightBox(10)
     }
 }

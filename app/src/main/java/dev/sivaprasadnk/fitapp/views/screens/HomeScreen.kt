@@ -25,7 +25,7 @@ import dev.sivaprasadnk.fitapp.views.components.RecentPosts
 
 @Composable
 fun HomeScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
-    val blogs by blogViewModel.blogs
+    val blogs by blogViewModel.recentBlogs
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
         topBar = {
@@ -40,7 +40,7 @@ fun HomeScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
             CoverImage()
             blogs.find { it.is_featured }?.let { FeaturedPost(it, navController) }
             HeightBox(50)
-            RecentPosts(blogs.take(3), navController)
+            RecentPosts(blogs, navController)
             HeightBox(20)
             QuoteSection()
             HeightBox(30)

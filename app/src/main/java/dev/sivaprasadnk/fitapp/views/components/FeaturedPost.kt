@@ -24,7 +24,7 @@ fun FeaturedPost(blog: Blog, navController: NavHostController){
             .background(color = Color.White)
     ) {
         Column {
-            SectionTitle("F E A T U R E D")
+            SectionTitle("F E A T U R E D", subTitle = "P O S T")
             Box(
                 modifier = Modifier.padding(8.dp)
             ) {

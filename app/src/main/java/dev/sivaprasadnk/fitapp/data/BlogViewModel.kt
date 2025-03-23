@@ -13,8 +13,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BlogViewModel @Inject constructor() : ViewModel() {
-    private val _blogs = mutableStateOf<List<Blog>>(emptyList())
-    val blogs: State<List<Blog>> = _blogs
+    private val _recentBlogs = mutableStateOf<List<Blog>>(emptyList())
+    val recentBlogs: State<List<Blog>> = _recentBlogs
+
+    private val _allBlogs = mutableStateOf<List<Blog>>(emptyList())
+    val allBlogs: State<List<Blog>> = _allBlogs
 
     private val _blog = mutableStateOf<Blog?>(null)
     val blog: State<Blog?> = _blog
@@ -42,7 +45,7 @@ class BlogViewModel @Inject constructor() : ViewModel() {
             try{
                 val response = blogService.getRecentBlogs(3)
                 if(response.isSuccessful){
-                    _blogs.value= response.body()!!
+                    _recentBlogs.value= response.body()!!
                     _loading.value= false
                     _completed.value= true
                 }else{
@@ -74,6 +77,21 @@ class BlogViewModel @Inject constructor() : ViewModel() {
             }catch (e: Exception){
                 _error.value= e.message.toString()
                 _detailsLoading.value= false
+            }
+        }
+    }
+
+    fun fetchAllBlogs(){
+        viewModelScope.launch {
+            try{
+                val response = blogService.getAllBlogs()
+                if(response.isSuccessful){
+                    _allBlogs.value= response.body()!!
+                }else{
+                    _error.value= "Something went wrong"
+                }
+            }catch (e: Exception){
+                _error.value= e.message.toString()
             }
         }
     }

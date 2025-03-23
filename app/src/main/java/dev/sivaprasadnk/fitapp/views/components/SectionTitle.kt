@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import dev.sivaprasadnk.fitapp.R
 
 @Composable
-fun SectionTitle(title: String){
+fun SectionTitle(title: String, subTitle: String = "P O S T S"){
     Column {
         Text(
             title,
@@ -27,7 +27,7 @@ fun SectionTitle(title: String){
             fontSize = 24.sp
         )
         Text(
-            "P O S T",
+            subTitle,
             fontFamily = FontFamily(Font(R.font.playfair_display)),
             modifier = Modifier.padding(start = 8.dp),
             fontSize = 24.sp

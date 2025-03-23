@@ -34,8 +34,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import dev.sivaprasadnk.fitapp.R
@@ -48,7 +46,7 @@ fun SplashScreen(
     navController: NavHostController = rememberNavController(),
     blogViewModel: BlogViewModel,
 ) {
-    val blogs by blogViewModel.blogs
+    val blogs by blogViewModel.recentBlogs
     val isLoading by blogViewModel.loading
     var isCompleted = blogViewModel.completed.value
     val context = LocalContext.current
