@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,13 +29,18 @@ fun RecentPosts(blogs: List<Blog>) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(start = 8.dp, end = 8.dp)
             ) {
                 blogs.take(3).forEach { blog ->
                     BlogItem(blog) // ✅ Replaces LazyColumn with Column
                 }
             }
-
-        HeightBox(20)
+        HorizontalDivider(
+            thickness = 1.dp,
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+        HeightBox(10)
+        ShowAll()
+        HeightBox(10)
     }
 }

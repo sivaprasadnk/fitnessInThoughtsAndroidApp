@@ -1,6 +1,6 @@
 package dev.sivaprasadnk.fitapp.api
 
-import dev.sivaprasadnk.fitapp.constants.ApiConstants.BASE_URL
+import dev.sivaprasadnk.fitapp.constants.Constants.BASE_URL
 import dev.sivaprasadnk.fitapp.data.Blog
 import retrofit2.Response
 import retrofit2.Retrofit

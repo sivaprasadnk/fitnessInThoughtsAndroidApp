@@ -32,7 +32,7 @@ fun SectionTitle(title: String){
             modifier = Modifier.padding(start = 8.dp),
             fontSize = 24.sp
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        HeightBox(24)
         Box(
             modifier = Modifier
                 .width(50.dp)  // Width of 50dp
@@ -40,6 +40,6 @@ fun SectionTitle(title: String){
                 .padding(start = 8.dp)
                 .background(colorResource(R.color.orange)) // Change color as needed
         )
-        Spacer(modifier = Modifier.height(50.dp))
+        HeightBox(30)
     }
 }

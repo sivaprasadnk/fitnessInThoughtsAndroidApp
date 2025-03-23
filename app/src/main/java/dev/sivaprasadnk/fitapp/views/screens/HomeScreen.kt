@@ -18,6 +18,7 @@ import dev.sivaprasadnk.fitapp.views.components.AppBar
 import dev.sivaprasadnk.fitapp.views.components.CoverImage
 import dev.sivaprasadnk.fitapp.views.components.FeaturedPost
 import dev.sivaprasadnk.fitapp.views.components.HeightBox
+import dev.sivaprasadnk.fitapp.views.components.QuoteSection
 import dev.sivaprasadnk.fitapp.views.components.RecentPosts
 
 @Composable
@@ -35,13 +36,13 @@ fun HomeScreen(blogViewModel: BlogViewModel) {
                 .verticalScroll(rememberScrollState())
         ) {
             CoverImage()
-            if (blogs.isNotEmpty())
-                blogs.find { it.is_featured }?.let { FeaturedPost(it) }
+            blogs.find { it.is_featured }?.let { FeaturedPost(it) }
             HeightBox(50)
-            if (blogs.isNotEmpty())
-
-                RecentPosts(blogs.take(3))
+            RecentPosts(blogs.take(3))
             HeightBox(20)
+            QuoteSection()
+            HeightBox(20)
+
 
         }
     }
