@@ -46,20 +46,37 @@ fun SplashScreen(
     navController: NavHostController = rememberNavController(),
     blogViewModel: BlogViewModel,
 ) {
-    val blogs by blogViewModel.recentBlogs
-    val isLoading by blogViewModel.loading
-    var isCompleted = blogViewModel.completed.value
     val context = LocalContext.current
     var isConnected by remember { mutableStateOf(checkInternetConnection(context)) }
 
-    LaunchedEffect(isConnected, blogs, isLoading) {
-        if (isConnected) {
-            if (isCompleted) {
-                navController.navigate("home_screen") {
-                    popUpTo("splash_screen") { inclusive = true }
-                }
+    // Automatically update connection status
+    LaunchedEffect(Unit) {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: android.net.Network) {
+                isConnected = true
+//                navigateToHome(blogViewModel, navController)
 
             }
+
+            override fun onLost(network: android.net.Network) {
+                isConnected = false
+            }
+        }
+
+        connectivityManager.registerDefaultNetworkCallback(networkCallback)
+
+        // Cleanup when composable is removed
+//        onDispose {
+//            connectivityManager.unregisterNetworkCallback(networkCallback)
+//        }
+    }
+
+    // Automatically navigate when connected
+    LaunchedEffect(isConnected) {
+        if (isConnected) {
+            navigateToHome(blogViewModel, navController)
         }
     }
 
@@ -74,57 +91,44 @@ fun SplashScreen(
         ) {
             val configuration = LocalConfiguration.current
             HeightBox((configuration.screenHeightDp * 0.37).toInt())
+
             Box(
                 modifier = Modifier
                     .size(196.dp)
-                    .shadow(12.dp, shape = RoundedCornerShape(16.dp)) // Adding shadow
+                    .shadow(12.dp, shape = RoundedCornerShape(16.dp))
                     .clip(RoundedCornerShape(8.dp))
-                    .background(Color.White) // Optional: Better visibility
+                    .background(Color.White)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.play_store_icon),
                     contentDescription = "logo",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 )
             }
+
             VersionText()
             HeightBox(20)
-            if (!isCompleted)
-                Button(onClick = {
-                    isConnected = checkInternetConnection(context)
-                    if (isConnected) {
-                        blogViewModel.fetchRecentBlogs()
-                        isCompleted = blogViewModel.completed.value
-                        if (isCompleted) {
-                            navController.navigate("home_screen") {
-                                popUpTo("splash_screen") { inclusive = true }
-                            }
 
-                        }
-                    } else {
-                        showToast(context, "No Internet Connection")
-                    }
-                }) {
-                    if (isLoading)
-                        CircularProgressIndicator(
-                            color = Color.White,
-                            modifier = Modifier.size(24.dp)
-                        ) else {
-                        Text("Continue")
-                    }
-                }
+            if (!isConnected) {
+                Text("No Internet connection. Waiting for connection...")
+            }
         }
-
     }
 
+
+
 }
 
-fun showToast(context: Context, message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+fun navigateToHome(blogViewModel: BlogViewModel, navController: NavHostController){
+    blogViewModel.fetchRecentBlogs()
+        navController.navigate("home_screen") {
+            popUpTo("splash_screen") { inclusive = true }
+        }
 }
 
+
+// Function to check initial network state
 fun checkInternetConnection(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

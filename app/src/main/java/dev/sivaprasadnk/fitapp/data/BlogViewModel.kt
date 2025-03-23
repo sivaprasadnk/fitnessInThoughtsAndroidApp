@@ -43,6 +43,8 @@ class BlogViewModel @Inject constructor() : ViewModel() {
     fun fetchRecentBlogs(){
         viewModelScope.launch {
             try{
+                _loading.value= true
+
                 val response = blogService.getRecentBlogs(3)
                 if(response.isSuccessful){
                     _recentBlogs.value= response.body()!!
