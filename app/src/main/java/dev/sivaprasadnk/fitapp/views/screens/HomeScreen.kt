@@ -29,7 +29,7 @@ fun HomeScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
         topBar = {
-            AppBar()
+            AppBar(navController)
         }
     ) { paddingValues ->
         Column(

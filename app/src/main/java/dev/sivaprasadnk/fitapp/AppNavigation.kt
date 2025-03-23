@@ -27,7 +27,7 @@ fun AppNavigation(
         }
         composable("details_screen/{id}") { backStackEntry ->
             val blogId = backStackEntry.arguments?.getString("id")?.toInt() ?: -1
-            DetailsScreen(blogId, blogViewModel )
+            DetailsScreen(blogId, blogViewModel, navController )
         }
     }
 

@@ -22,6 +22,9 @@ class BlogViewModel @Inject constructor() : ViewModel() {
     private val _loading = mutableStateOf(true)
     val loading: State<Boolean> = _loading
 
+    private val _detailsLoading = mutableStateOf(true)
+    val detailsLoading: State<Boolean> = _detailsLoading
+
     private val _completed = mutableStateOf(false)
     val completed: State<Boolean> = _completed
 
@@ -57,20 +60,20 @@ class BlogViewModel @Inject constructor() : ViewModel() {
     fun fetchBlogDetails(id: Int){
         viewModelScope.launch {
             try{
-                Log.d("fetchBlogDetails", "");
+                _detailsLoading.value= true
                 val response = blogService.getBlog(id)
                 if(response.isSuccessful){
                     _blog.value= response.body()!!
-                    _loading.value= false
+                    _detailsLoading.value= false
                     _completed.value= true
                 }else{
-                    _loading.value=false
+                    _detailsLoading.value=false
                     _completed.value= true
                     _error.value= "Something went wrong"
                 }
             }catch (e: Exception){
                 _error.value= e.message.toString()
-                _loading.value= false
+                _detailsLoading.value= false
             }
         }
     }
