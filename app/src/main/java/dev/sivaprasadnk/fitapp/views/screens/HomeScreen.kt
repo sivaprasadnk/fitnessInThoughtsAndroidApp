@@ -11,18 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.data.BlogViewModel
 
 import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.views.components.AppBar
 import dev.sivaprasadnk.fitapp.views.components.CoverImage
 import dev.sivaprasadnk.fitapp.views.components.FeaturedPost
+import dev.sivaprasadnk.fitapp.views.components.Footer
 import dev.sivaprasadnk.fitapp.views.components.HeightBox
 import dev.sivaprasadnk.fitapp.views.components.QuoteSection
 import dev.sivaprasadnk.fitapp.views.components.RecentPosts
 
 @Composable
-fun HomeScreen(blogViewModel: BlogViewModel) {
+fun HomeScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
     val blogs by blogViewModel.blogs
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
@@ -36,14 +38,14 @@ fun HomeScreen(blogViewModel: BlogViewModel) {
                 .verticalScroll(rememberScrollState())
         ) {
             CoverImage()
-            blogs.find { it.is_featured }?.let { FeaturedPost(it) }
+            blogs.find { it.is_featured }?.let { FeaturedPost(it, navController) }
             HeightBox(50)
-            RecentPosts(blogs.take(3))
+            RecentPosts(blogs.take(3), navController)
             HeightBox(20)
             QuoteSection()
-            HeightBox(20)
-
-
+            HeightBox(30)
+            Footer()
+            HeightBox(10)
         }
     }
 }

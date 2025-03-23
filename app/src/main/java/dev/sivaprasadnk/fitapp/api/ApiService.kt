@@ -19,4 +19,7 @@ val blogService = retrofit.create(ApiService::class.java)
 interface ApiService {
     @GET("blogs/recent/{count}")
     suspend fun getRecentBlogs(@Path("count") count: Int): Response<List<Blog>>
+
+    @GET("blog/{id}")
+    suspend fun getBlog(@Path("id") id: Int): Response<Blog>
 }

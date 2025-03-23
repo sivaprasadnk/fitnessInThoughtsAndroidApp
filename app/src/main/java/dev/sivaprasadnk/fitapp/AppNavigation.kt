@@ -1,12 +1,14 @@
 package dev.sivaprasadnk.fitapp
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.sivaprasadnk.fitapp.data.BlogViewModel
+import dev.sivaprasadnk.fitapp.views.screens.DetailsScreen
 import dev.sivaprasadnk.fitapp.views.screens.HomeScreen
 import dev.sivaprasadnk.fitapp.views.screens.SplashScreen
 
@@ -21,7 +23,11 @@ fun AppNavigation(
             SplashScreen(navController, blogViewModel)
         }
         composable("home_screen") {
-            HomeScreen(blogViewModel)
+            HomeScreen(blogViewModel, navController)
+        }
+        composable("details_screen/{id}") { backStackEntry ->
+            val blogId = backStackEntry.arguments?.getString("id")?.toInt() ?: -1
+            DetailsScreen(blogId, blogViewModel )
         }
     }
 

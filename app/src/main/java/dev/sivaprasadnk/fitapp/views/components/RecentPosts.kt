@@ -12,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.data.Blog
 
 @Composable
-fun RecentPosts(blogs: List<Blog>) {
+fun RecentPosts(blogs: List<Blog>, navController: NavHostController) {
 
     Column( // ✅ Use Column with a constrained height
         modifier = Modifier
@@ -32,7 +33,7 @@ fun RecentPosts(blogs: List<Blog>) {
                     .padding(start = 8.dp, end = 8.dp)
             ) {
                 blogs.take(3).forEach { blog ->
-                    BlogItem(blog) // ✅ Replaces LazyColumn with Column
+                    BlogItem(blog, navController) // ✅ Replaces LazyColumn with Column
                 }
             }
         HorizontalDivider(

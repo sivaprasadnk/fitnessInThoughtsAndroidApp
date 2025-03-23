@@ -1,5 +1,7 @@
 package dev.sivaprasadnk.fitapp.views.components
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -10,13 +12,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.colintheshots.twain.MarkdownText
 import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.data.Blog
 
 @Composable
-fun BlogItem(blog: Blog) {
-    Column() {
+fun BlogItem(blog: Blog, navController: NavHostController= rememberNavController()) {
+    Column(
+        modifier = Modifier.clickable {
+            Log.d("fetchBlogDetails @1", "tapped");
+
+            navController.navigate("details_screen/${blog.id}")
+        }
+    ) {
 //        Image(
 //            painter = rememberAsyncImagePainter(blog.imageNetworkPath),
 //            contentDescription = "featured",

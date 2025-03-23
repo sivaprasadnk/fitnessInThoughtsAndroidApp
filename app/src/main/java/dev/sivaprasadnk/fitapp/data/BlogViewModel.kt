@@ -16,6 +16,9 @@ class BlogViewModel @Inject constructor() : ViewModel() {
     private val _blogs = mutableStateOf<List<Blog>>(emptyList())
     val blogs: State<List<Blog>> = _blogs
 
+    private val _blog = mutableStateOf<Blog?>(null)
+    val blog: State<Blog?> = _blog
+
     private val _loading = mutableStateOf(true)
     val loading: State<Boolean> = _loading
 
@@ -32,12 +35,32 @@ class BlogViewModel @Inject constructor() : ViewModel() {
 
 
     fun fetchRecentBlogs(){
-        Log.d("fetchRecentBlogs called", "")
         viewModelScope.launch {
             try{
                 val response = blogService.getRecentBlogs(3)
                 if(response.isSuccessful){
                     _blogs.value= response.body()!!
+                    _loading.value= false
+                    _completed.value= true
+                }else{
+                    _loading.value=false
+                    _completed.value= true
+                    _error.value= "Something went wrong"
+                }
+            }catch (e: Exception){
+                _error.value= e.message.toString()
+                _loading.value= false
+            }
+        }
+    }
+
+    fun fetchBlogDetails(id: Int){
+        viewModelScope.launch {
+            try{
+                Log.d("fetchBlogDetails", "");
+                val response = blogService.getBlog(id)
+                if(response.isSuccessful){
+                    _blog.value= response.body()!!
                     _loading.value= false
                     _completed.value= true
                 }else{

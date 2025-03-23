@@ -11,10 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.data.Blog
 
 @Composable
-fun FeaturedPost(blog: Blog){
+fun FeaturedPost(blog: Blog, navController: NavHostController){
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,7 +28,7 @@ fun FeaturedPost(blog: Blog){
             Box(
                 modifier = Modifier.padding(8.dp)
             ) {
-                BlogItem(blog)
+                BlogItem(blog, navController)
             }
             HeightBox(20)
         }
