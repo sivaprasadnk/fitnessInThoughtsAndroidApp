@@ -24,7 +24,7 @@ fun AppNavigation(
             SplashScreen(navController, blogViewModel)
         }
         composable("home_screen") {
-            HomeScreen(blogViewModel, navController)
+            HomeScreen(navController)
         }
         composable("details_screen/{id}") { backStackEntry ->
             val blogId = backStackEntry.arguments?.getString("id")?.toInt() ?: -1

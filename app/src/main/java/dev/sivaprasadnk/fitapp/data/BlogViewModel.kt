@@ -1,18 +1,14 @@
 package dev.sivaprasadnk.fitapp.data
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.sivaprasadnk.fitapp.api.blogService
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
-@HiltViewModel
-class BlogViewModel @Inject constructor() : ViewModel() {
+class BlogViewModel : ViewModel() {
     private val _recentBlogs = mutableStateOf<List<Blog>>(emptyList())
     val recentBlogs: State<List<Blog>> = _recentBlogs
 

@@ -1,28 +1,34 @@
 package dev.sivaprasadnk.fitapp.views.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.data.BlogViewModel
 import dev.sivaprasadnk.fitapp.views.components.*
 
 @Composable
-fun HomeScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
+fun HomeScreen(navController: NavHostController, blogViewModel: BlogViewModel = viewModel()) {
     val blogs by blogViewModel.recentBlogs
     val isCompleted by blogViewModel.completed
     val isLoading by blogViewModel.loading
+    val error by blogViewModel.error
 
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
@@ -36,6 +42,13 @@ fun HomeScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CoverImage()
+            if(error.isNotEmpty())
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(all = 8.dp),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Text(error)
+                }
 
             // Show loading indicator if data is still loading
             if (isLoading) {
