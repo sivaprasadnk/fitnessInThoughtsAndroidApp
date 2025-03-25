@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -46,7 +47,7 @@ fun ShowAll(navHostController: NavHostController) {
         horizontalArrangement = Arrangement.Absolute.Center
     ) {
         Text(
-            "Show all",
+            stringResource(R.string.show_all),
             fontWeight = FontWeight.Bold,
             fontSize = 12.sp,
             fontFamily = FontFamily(Font(R.font.lora_regular))

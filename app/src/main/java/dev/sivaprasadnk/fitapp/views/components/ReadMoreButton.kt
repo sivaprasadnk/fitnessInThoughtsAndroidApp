@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -25,7 +26,7 @@ fun ReadMoreButton() {
         horizontalArrangement = Arrangement.End
     ) {
         Text(
-            "Read more",
+            stringResource(R.string.read_more),
             fontWeight = FontWeight.Bold,
             fontSize = 12.sp,
             fontFamily = FontFamily(Font(R.font.lora_regular))

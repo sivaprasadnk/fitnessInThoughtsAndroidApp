@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 object Constants{
+    const val PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=dev.sivaprasadnk.fitapp"
     const val BASE_URL = "https://fitnessblogbackend-production.up.railway.app/"
     const val QUOTE = "Fitness is not about being better than someone else; \nit's about being better than you used to be."
 }

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Fit App</string>
     <string name="app_title">Fitness in Thoughts</string>
+    <string name="show_all">Show all</string>
+    <string name="read_more">Read More</string>
+    <string name="no_internet_connection_please_try_again">No internet connection. Please try again!</string>
 </resources>

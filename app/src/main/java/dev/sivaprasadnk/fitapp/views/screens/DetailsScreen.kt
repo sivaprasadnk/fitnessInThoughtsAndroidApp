@@ -44,7 +44,7 @@ fun DetailsScreen(id: Int, blogViewModel: BlogViewModel, navController: NavContr
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
         topBar = {
-            AppBar(navController, showBackIcon = true)
+            AppBar(navController, showBackIcon = true, onMenuClick = {})
         }
     ) { paddingValues ->
         Box(

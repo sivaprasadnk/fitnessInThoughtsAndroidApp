@@ -40,7 +40,7 @@ fun AllPostsScreen(blogViewModel: BlogViewModel, navController: NavHostControlle
     Scaffold(
         containerColor = colorResource(R.color.bgColor),
         topBar = {
-            AppBar(navController, showBackIcon = true)
+            AppBar(navController, showBackIcon = true, onMenuClick = {})
         }
     ) { paddingValues ->
         Box(

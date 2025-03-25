@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,18 +27,25 @@ import dev.sivaprasadnk.fitapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(navController: NavController, showBackIcon: Boolean = false){
+fun AppBar(navController: NavController, showBackIcon: Boolean = false, onMenuClick: ()-> Unit){
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.White
         ),
         navigationIcon = {
-            if(showBackIcon)
+            if(showBackIcon){
                 IconButton(onClick = {
                     navController.popBackStack()
                 }) {
                     Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "back")
-               }
+                }
+            }else{
+                IconButton(onClick = {
+                    onMenuClick()
+                }) {
+                    Icon(imageVector = Icons.Default.Menu, contentDescription = "menu")
+                }
+            }
         },
         title = {
             Box(
@@ -45,7 +53,7 @@ fun AppBar(navController: NavController, showBackIcon: Boolean = false){
             ) {
                 Text(
                     stringResource(R.string.app_title),
-                    textAlign = if (showBackIcon) TextAlign.Start else TextAlign.Center,
+                    textAlign = if (showBackIcon) TextAlign.Start else TextAlign.Start,
                     fontFamily = FontFamily(Font(R.font.lora_bold)),
                     modifier = Modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Bold,
