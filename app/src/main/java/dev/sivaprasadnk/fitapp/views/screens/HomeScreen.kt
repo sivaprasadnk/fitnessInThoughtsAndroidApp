@@ -38,7 +38,8 @@ fun HomeScreen(navController: NavHostController, blogViewModel: BlogViewModel = 
     val scope = rememberCoroutineScope()
     ModalNavigationDrawer(
         drawerContent = {
-            HomeDrawer(navController)
+            HomeDrawer(navController, blogViewModel
+            )
         },
         drawerState = drawerState,
     ) {
@@ -85,7 +86,7 @@ fun HomeScreen(navController: NavHostController, blogViewModel: BlogViewModel = 
 
                     // Show recent posts only if data is loaded
                     if (isCompleted) {
-                        RecentPosts(blogs, navController)
+                        RecentPosts(blogs, navController, blogViewModel)
                         HeightBox(20)
                         QuoteSection()
                         HeightBox(30)

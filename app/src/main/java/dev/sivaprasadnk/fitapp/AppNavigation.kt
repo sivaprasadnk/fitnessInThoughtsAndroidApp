@@ -30,8 +30,9 @@ fun AppNavigation(
             val blogId = backStackEntry.arguments?.getString("id")?.toInt() ?: -1
             DetailsScreen(blogId, blogViewModel, navController )
         }
-        composable("all_posts_screen") {
-            AllPostsScreen(blogViewModel, navController )
+        composable("all_posts_screen/{category}") {backStackEntry ->
+            val category  = backStackEntry.arguments?.getString("category") ?: "all"
+            AllPostsScreen(blogViewModel, navController, category )
         }
     }
 

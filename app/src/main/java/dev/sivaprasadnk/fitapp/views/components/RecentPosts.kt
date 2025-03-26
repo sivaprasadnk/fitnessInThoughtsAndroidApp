@@ -14,9 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.data.Blog
+import dev.sivaprasadnk.fitapp.data.BlogViewModel
 
 @Composable
-fun RecentPosts(blogs: List<Blog>, navController: NavHostController) {
+fun RecentPosts(blogs: List<Blog>, navController: NavHostController, blogViewModel: BlogViewModel) {
 
     Column( // ✅ Use Column with a constrained height
         modifier = Modifier
@@ -41,7 +42,7 @@ fun RecentPosts(blogs: List<Blog>, navController: NavHostController) {
             modifier = Modifier.padding(horizontal = 8.dp)
         )
         HeightBox(10)
-        ShowAll(navController)
+        ShowAll(navController, blogViewModel)
         HeightBox(10)
     }
 }

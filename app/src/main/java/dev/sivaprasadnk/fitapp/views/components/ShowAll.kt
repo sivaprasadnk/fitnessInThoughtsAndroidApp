@@ -23,15 +23,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.constants.checkInternetConnection
+import dev.sivaprasadnk.fitapp.data.BlogViewModel
 
 @Composable
-fun ShowAll(navHostController: NavHostController) {
+fun ShowAll(navHostController: NavHostController, blogViewModel: BlogViewModel) {
     val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
                 if (checkInternetConnection(context)) {
+                    blogViewModel.updateCategory("all")
+
                     navHostController.navigate("all_posts_screen")
 
                 } else {

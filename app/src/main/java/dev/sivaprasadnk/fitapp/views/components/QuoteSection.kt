@@ -19,7 +19,7 @@ import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.constants.Constants.QUOTE
 
 @Composable
-fun QuoteSection() {
+fun     QuoteSection() {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally

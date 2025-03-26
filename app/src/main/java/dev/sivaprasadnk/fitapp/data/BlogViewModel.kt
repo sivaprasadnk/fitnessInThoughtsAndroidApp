@@ -1,5 +1,6 @@
 package dev.sivaprasadnk.fitapp.data
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,10 @@ import kotlinx.coroutines.launch
 class BlogViewModel : ViewModel() {
     private val _recentBlogs = mutableStateOf<List<Blog>>(emptyList())
     val recentBlogs: State<List<Blog>> = _recentBlogs
+
+    private var _category = mutableStateOf("all")
+    val category: State<String> = _category
+
 
     private val _allBlogs = mutableStateOf<List<Blog>>(emptyList())
     val allBlogs: State<List<Blog>> = _allBlogs
@@ -32,6 +37,11 @@ class BlogViewModel : ViewModel() {
 
     init {
         fetchRecentBlogs()
+    }
+
+    fun updateCategory(value:String){
+        _category.value = value
+        Log.d("categoryName", category.value)
     }
 
 
@@ -81,10 +91,28 @@ class BlogViewModel : ViewModel() {
     }
 
     fun fetchAllBlogs(){
+        Log.d("fetchAllBlogs", "all")
+
         viewModelScope.launch {
             try{
                 _allBlogs.value= emptyList()
                 val response = blogService.getAllBlogs()
+                if(response.isSuccessful){
+                    _allBlogs.value= response.body()!!
+                }else{
+                    _error.value= "Something went wrong"
+                }
+            }catch (e: Exception){
+                _error.value= e.message.toString()
+            }
+        }
+    }
+
+    fun fetchAllBlogsForCategory(value: String){
+        viewModelScope.launch {
+            try{
+                _allBlogs.value= emptyList()
+                val response = blogService.getAllBlogsForCategory(value)
                 if(response.isSuccessful){
                     _allBlogs.value= response.body()!!
                 }else{

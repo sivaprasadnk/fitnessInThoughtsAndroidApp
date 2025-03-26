@@ -1,5 +1,6 @@
 package dev.sivaprasadnk.fitapp.views.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,10 +30,16 @@ import dev.sivaprasadnk.fitapp.views.components.HeightBox
 import dev.sivaprasadnk.fitapp.views.components.SectionTitle
 
 @Composable
-fun AllPostsScreen(blogViewModel: BlogViewModel, navController: NavHostController) {
-
+fun AllPostsScreen(blogViewModel: BlogViewModel, navController: NavHostController, category:String) {
     LaunchedEffect(Unit) {
-        blogViewModel.fetchAllBlogs()
+        Log.d("categoryName@", category)
+
+        if( category=="all"){
+            blogViewModel.fetchAllBlogs()
+
+        }else{
+            blogViewModel.fetchAllBlogsForCategory(category)
+        }
     }
 
     val blogs by blogViewModel.allBlogs

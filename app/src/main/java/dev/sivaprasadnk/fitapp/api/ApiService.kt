@@ -23,6 +23,9 @@ interface ApiService {
     @GET("blog/{id}")
     suspend fun getBlog(@Path("id") id: Int): Response<Blog>
 
-    @GET("blogs")
+    @GET("blogs/")
     suspend fun getAllBlogs(): Response<List<Blog>>
+
+    @GET("blogs/{category}")
+    suspend fun getAllBlogsForCategory(@Path("category") category: String): Response<List<Blog>>
 }

@@ -39,9 +39,10 @@ import androidx.navigation.NavController
 import dev.sivaprasadnk.fitapp.R
 import dev.sivaprasadnk.fitapp.constants.Constants.PLAYSTORE_URL
 import dev.sivaprasadnk.fitapp.constants.checkInternetConnection
+import dev.sivaprasadnk.fitapp.data.BlogViewModel
 
 @Composable
-fun HomeDrawer(navController: NavController) {
+fun HomeDrawer(navController: NavController, blogViewModel: BlogViewModel) {
     val configuration = LocalConfiguration.current
     val width = configuration.screenWidthDp
     val context = LocalContext.current
@@ -54,7 +55,7 @@ fun HomeDrawer(navController: NavController) {
                 .width((width * 0.6).toInt().dp)
                 .background(color = Color.White)
         ) {
-            HeightBox(100)
+            HeightBox(74)
             Box(
                 modifier = Modifier
                     .size(150.dp)
@@ -74,12 +75,29 @@ fun HomeDrawer(navController: NavController) {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 16.dp)
             )
+            CategoryItem(navController, "Workout")
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 16.dp)
+            )
+            CategoryItem(navController, "Nutrition")
+
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 16.dp)
+            )
+            CategoryItem(navController, "Sleep")
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 16.dp)
+            )
+            CategoryItem(navController, "Weight")
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 16.dp)
+            )
             Text(
                 "All Posts",
                 fontFamily = FontFamily(Font(R.font.lora_regular)),
                 modifier = Modifier.clickable {
                     if (checkInternetConnection(context)) {
-                        navController.navigate("all_posts_screen")
+                        navController.navigate("all_posts_screen/all")
 
                     } else {
                         Toast
@@ -94,7 +112,7 @@ fun HomeDrawer(navController: NavController) {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 16.dp)
             )
-            HeightBox(100)
+            HeightBox(50)
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
